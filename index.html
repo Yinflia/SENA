@@ -8,63 +8,66 @@
 </head>
 <body class="bg-slate-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
 
-    <div class="max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+    <div class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
         
-        <header class="mb-8 text-center bg-blue-400/30 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-slate-100">
-            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
-                💰 Sena (Smart Economy Navigation Assistant)
+        <header class="mb-8 text-center bg-blue-400/40 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight flex items-center justify-center gap-2 flex-wrap">
+                <span class="inline-block select-none">💰</span>
+                <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                    Sena (Smart Economy Navigation Assistant)
+                </span>
             </h1>
             <p class="text-slate-500 text-xs sm:text-sm font-medium mt-2 tracking-wide uppercase">Asisten Keuangan Cerdas</p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
                 <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Total Pemasukan</p>
-                        <p id="total-pemasukan" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-2">Rp 0</p>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0">
+                        <p class="text-[10px] sm:text-xs uppercase text-slate-400 font-bold tracking-wider truncate">Total Pemasukan</p>
+                        <p id="total-pemasukan" class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-emerald-600 mt-2 truncate">Rp 0</p>
                     </div>
-                    <div class="p-2 bg-emerald-50 rounded-lg text-emerald-500 group-hover:scale-110 transition-transform">%📈</div>
+                    <div class="p-2 bg-emerald-50 rounded-lg text-emerald-500 text-sm sm:text-base shrink-0">📈</div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
                 <div class="absolute top-0 left-0 w-2 h-full bg-rose-500"></div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Total Pengeluaran</p>
-                        <p id="total-pengeluaran" class="text-2xl sm:text-3xl font-extrabold text-rose-600 mt-2">Rp 0</p>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0">
+                        <p class="text-[10px] sm:text-xs uppercase text-slate-400 font-bold tracking-wider truncate">Total Pengeluaran</p>
+                        <p id="total-pengeluaran" class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-rose-600 mt-2 truncate">Rp 0</p>
                     </div>
-                    <div class="p-2 bg-rose-50 rounded-lg text-rose-500 group-hover:scale-110 transition-transform">📉</div>
+                    <div class="p-2 bg-rose-50 rounded-lg text-rose-500 text-sm sm:text-base shrink-0">📉</div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group sm:col-span-2 lg:col-span-1">
                 <div class="absolute top-0 left-0 w-2 h-full bg-indigo-600" id="garis-saldo"></div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Sisa Saldo</p>
-                        <p id="sisa-saldo" class="text-2xl sm:text-3xl font-extrabold text-indigo-600 mt-2">Rp 0</p>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0">
+                        <p class="text-[10px] sm:text-xs uppercase text-slate-400 font-bold tracking-wider truncate">Sisa Saldo</p>
+                        <p id="sisa-saldo" class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-indigo-600 mt-2 truncate">Rp 0</p>
                     </div>
-                    <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500 group-hover:scale-110 transition-transform" id="box-ikon-saldo">⚖️</div>
+                    <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500 text-sm sm:text-base shrink-0" id="box-ikon-saldo">⚖️</div>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
-                <h2 class="text-xl font-bold mb-5 text-slate-800 flex items-center gap-2">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-4 w-full">
+                <h2 class="text-lg sm:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
                     <span>✍️</span> Tambah Transaksi
                 </h2>
                 <form id="form-transaksi" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Deskripsi</label>
-                        <input type="text" id="deskripsi" required placeholder="Sembako, Gaji, dll" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-sm p-3 border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
+                        <input type="text" id="deskripsi" required placeholder="Sembako, Gaji, dll" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-sm p-2.5 border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Jumlah (Rp)</label>
-                        <input type="text" id="jumlah" required placeholder="Contoh: 2000, 2.000" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-sm p-3 border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
+                        <input type="text" id="jumlah" required placeholder="Contoh: 2000, 2.000" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-sm p-2.5 border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Jenis</label>
@@ -73,22 +76,22 @@
                             <option value="pengeluaran">Pengeluaran (Keluar)</option>
                         </select>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-3 px-4 rounded-xl hover:from-indigo-700 hover:to-blue-700 font-semibold shadow-sm hover:shadow-md transition-all duration-150 mt-2 text-sm cursor-pointer">Simpan Transaksi</button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-2.5 px-4 rounded-xl hover:from-indigo-700 hover:to-blue-700 font-semibold shadow-sm hover:shadow-md transition-all duration-150 mt-2 text-sm cursor-pointer">Simpan Transaksi</button>
                 </form>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 md:col-span-2">
-                <h2 class="text-xl font-bold mb-5 text-slate-800 flex items-center gap-2">
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-8 w-full overflow-hidden">
+                <h2 class="text-lg sm:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
                     <span>📋</span> Riwayat Transaksi
                 </h2>
-                <div class="overflow-x-auto rounded-xl border border-slate-100">
-                    <table class="min-w-full divide-y divide-slate-100">
+                <div class="w-full overflow-x-auto rounded-xl border border-slate-100">
+                    <table class="min-w-full divide-y divide-slate-100 table-auto">
                         <thead class="bg-slate-50">
                             <tr>
-                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Deskripsi</th>
-                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jenis</th>
-                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jumlah</th>
-                                <th class="px-5 py-3.5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Aksi</th>
+                                <th class="px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Deskripsi</th>
+                                <th class="px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jenis</th>
+                                <th class="px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jumlah</th>
+                                <th class="px-4 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="tabel-transaksi" class="bg-white divide-y divide-slate-100 text-sm">
@@ -167,13 +170,13 @@
             saldoEl.innerText = formatRupiah(saldo);
             
             if (saldo < 0) {
-                saldoEl.className = "text-2xl sm:text-3xl font-extrabold text-rose-600 mt-2";
+                saldoEl.className = "text-xl sm:text-2xl lg:text-3xl font-extrabold text-rose-600 mt-2 truncate";
                 garisSaldo.className = "absolute top-0 left-0 w-2 h-full bg-rose-500";
-                boxIkonSaldo.className = "p-2 bg-rose-50 rounded-lg text-rose-500";
+                boxIkonSaldo.className = "p-2 bg-rose-50 rounded-lg text-rose-500 shrink-0";
             } else {
-                saldoEl.className = "text-2xl sm:text-3xl font-extrabold text-indigo-600 mt-2";
+                saldoEl.className = "text-xl sm:text-2xl lg:text-3xl font-extrabold text-indigo-600 mt-2 truncate";
                 garisSaldo.className = "absolute top-0 left-0 w-2 h-full bg-indigo-600";
-                boxIkonSaldo.className = "p-2 bg-indigo-50 rounded-lg text-indigo-500";
+                boxIkonSaldo.className = "p-2 bg-indigo-50 rounded-lg text-indigo-500 shrink-0";
             }
         }
 
@@ -193,16 +196,16 @@
                 tr.className = "hover:bg-slate-50/80 transition-colors";
                 
                 const jenisBadge = t.jenis === 'pemasukan' 
-                    ? `<span class="px-2.5 py-1 inline-flex text-xs font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
-                    : `<span class="px-2.5 py-1 inline-flex text-xs font-bold rounded-md bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
+                    ? `<span class="px-2 py-0.5 inline-flex text-xs font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
+                    : `<span class="px-2 py-0.5 inline-flex text-xs font-bold rounded-md bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
 
                 const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600 font-semibold' : 'text-rose-600 font-semibold';
 
                 tr.innerHTML = `
-                    <td class="px-5 py-4 whitespace-nowrap text-slate-700 font-medium">${t.deskripsi}</td>
-                    <td class="px-5 py-4 whitespace-nowrap">${jenisBadge}</td>
-                    <td class="px-5 py-4 whitespace-nowrap ${warnaJumlah}">${formatRupiah(t.jumlah)}</td>
-                    <td class="px-5 py-4 whitespace-nowrap text-right text-xs font-medium">
+                    <td class="px-4 py-3 whitespace-nowrap text-slate-700 font-medium">${t.deskripsi}</td>
+                    <td class="px-4 py-3 whitespace-nowrap">${jenisBadge}</td>
+                    <td class="px-4 py-3 whitespace-nowrap ${warnaJumlah}">${formatRupiah(t.jumlah)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right text-xs font-medium">
                         <button onclick="hapusTransaksi(${index})" class="text-slate-400 hover:text-rose-600 transition font-bold px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">Hapus</button>
                     </td>
                 `;
