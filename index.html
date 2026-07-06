@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sena - Smart Economy Navigation Assistant</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
+
+    <div class="max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+        
+        <header class="mb-10 text-center bg-blue-400/30 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                💰 Sena (Smart Economy Navigation Assistant)
+            </h1>
+            <p class="text-slate-500 text-sm font-medium mt-2 tracking-wide uppercase">Asisten Keuangan Cerdas</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Total Pemasukan</p>
+                        <p id="total-pemasukan" class="text-3xl font-extrabold text-emerald-600 mt-2">Rp 0</p>
+                    </div>
+                    <div class="p-2 bg-emerald-50 rounded-lg text-emerald-500 group-hover:scale-110 transition-transform">📈</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-2 h-full bg-rose-500"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Total Pengeluaran</p>
+                        <p id="total-pengeluaran" class="text-3xl font-extrabold text-rose-600 mt-2">Rp 0</p>
+                    </div>
+                    <div class="p-2 bg-rose-50 rounded-lg text-rose-500 group-hover:scale-110 transition-transform">📉</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-2 h-full bg-indigo-600" id="garis-saldo"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">Sisa Saldo</p>
+                        <p id="sisa-saldo" class="text-3xl font-extrabold text-indigo-600 mt-2">Rp 0</p>
+                    </div>
+                    <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500 group-hover:scale-110 transition-transform" id="box-ikon-saldo">⚖️</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
+                <h2 class="text-xl font-bold mb-5 text-slate-800 flex items-center gap-2">
+                    <span>✍️</span> Tambah Transaksi
+                </h2>
+                <form id="form-transaksi" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Deskripsi</label>
+                        <input type="text" id="deskripsi" required placeholder="Sembako, Gaji, dll" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-xs p-3 border focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Jumlah (Rp)</label>
+                        <input type="text" id="jumlah" required placeholder="Contoh: 2000, 2.000, atau 2.000,00" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-xs p-3 border focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Jenis</label>
+                        <select id="jenis" class="mt-1.5 block w-full rounded-xl border-slate-200 shadow-xs p-3 border focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm bg-white">
+                            <option value="pemasukan">Pemasukan (Masuk)</option>
+                            <option value="pengeluaran">Pengeluaran (Keluar)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-3 px-4 rounded-xl hover:from-indigo-700 hover:to-blue-700 font-semibold shadow-sm hover:shadow-md transition-all duration-150 mt-2 text-sm cursor-pointer">Simpan Transaksi</button>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-2">
+                <h2 class="text-xl font-bold mb-5 text-slate-800 flex items-center gap-2">
+                    <span>📋</span> Riwayat Transaksi
+                </h2>
+                <div class="overflow-x-auto rounded-xl border border-slate-100">
+                    <table class="min-w-full divide-y divide-slate-100">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Deskripsi</th>
+                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jenis</th>
+                                <th class="px-5 py-3.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Jumlah</th>
+                                <th class="px-5 py-3.5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabel-transaksi" class="bg-white divide-y divide-slate-100 text-sm">
+                            </tbody>
+                    </table>
+                </div>
+                <div id="pesan-kosong" class="text-center py-10 text-slate-400 font-medium hidden">
+                    📭 Belum ada catatan transaksi masuk/keluar.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-slate-200 mt-auto py-6 text-sm text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-3 text-center">
+        <div>
+            <p>&copy; 2026 <span class="font-semibold text-slate-700">Sena Assistant</span>. Hak Cipta Dilindungi.</p>
+        </div>
+        
+        <div class="flex items-center gap-4 mt-1">
+            <a href="https://github.com/yinflia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-xs font-medium">GitHub</span>
+            </a>
+
+            <span class="text-slate-300">|</span>
+
+            <a href="https://linkedin.com/in/nabilafalia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-xs font-medium">LinkedIn</span>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let daftarTransaksi = JSON.parse(localStorage.getItem('transaksi')) || [];
+
+        const form = document.getElementById('form-transaksi');
+        const deskripsiInput = document.getElementById('deskripsi');
+        const jumlahInput = document.getElementById('jumlah');
+        const jenisInput = document.getElementById('jenis');
+
+        function bersihkanNominal(teks) {
+            let bersih = teks.trim();
+            if (bersih.match(/[\,\.]\d{2}$/)) {
+                bersih = bersih.substring(0, bersih.length - 3);
+            }
+            bersih = bersih.replace(/[\.\,]/g, '');
+            return parseFloat(bersih) || 0;
+        }
+
+        function formatRupiah(angka) {
+            return 'Rp ' + parseInt(angka).toLocaleString('id-ID');
+        }
+
+        function perbaruiDashboard() {
+            let pemasukan = 0;
+            let pengeluaran = 0;
+
+            daftarTransaksi.forEach(t => {
+                if (t.jenis === 'pemasukan') pemasukan += t.jumlah;
+                else pengeluaran += t.jumlah;
+            });
+
+            const saldo = pemasukan - pengeluaran;
+
+            document.getElementById('total-pemasukan').innerText = formatRupiah(pemasukan);
+            document.getElementById('total-pengeluaran').innerText = formatRupiah(pengeluaran);
+            
+            const saldoEl = document.getElementById('sisa-saldo');
+            const garisSaldo = document.getElementById('garis-saldo');
+            const boxIkonSaldo = document.getElementById('box-ikon-saldo');
+            
+            saldoEl.innerText = formatRupiah(saldo);
+            
+            if (saldo < 0) {
+                saldoEl.className = "text-3xl font-extrabold text-rose-600 mt-2";
+                garisSaldo.className = "absolute top-0 left-0 w-2 h-full bg-rose-500";
+                boxIkonSaldo.className = "p-2 bg-rose-50 rounded-lg text-rose-500";
+            } else {
+                saldoEl.className = "text-3xl font-extrabold text-indigo-600 mt-2";
+                garisSaldo.className = "absolute top-0 left-0 w-2 h-full bg-indigo-600";
+                boxIkonSaldo.className = "p-2 bg-indigo-50 rounded-lg text-indigo-500";
+            }
+        }
+
+        function renderTransaksi() {
+            const tabel = document.getElementById('tabel-transaksi');
+            const pesanKosong = document.getElementById('pesan-kosong');
+            tabel.innerHTML = '';
+
+            if (daftarTransaksi.length === 0) {
+                pesanKosong.classList.remove('hidden');
+            } else {
+                pesanKosong.classList.add('hidden');
+            }
+
+            daftarTransaksi.forEach((t, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                
+                const jenisBadge = t.jenis === 'pemasukan' 
+                    ? `<span class="px-2.5 py-1 inline-flex text-xs font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
+                    : `<span class="px-2.5 py-1 inline-flex text-xs font-bold rounded-md bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
+
+                const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600 font-semibold' : 'text-rose-600 font-semibold';
+
+                tr.innerHTML = `
+                    <td class="px-5 py-4 whitespace-nowrap text-slate-700 font-medium">${t.deskripsi}</td>
+                    <td class="px-5 py-4 whitespace-nowrap">${jenisBadge}</td>
+                    <td class="px-5 py-4 whitespace-nowrap ${warnaJumlah}">${formatRupiah(t.jumlah)}</td>
+                    <td class="px-5 py-4 whitespace-nowrap text-right text-xs font-medium">
+                        <button onclick="hapusTransaksi(${index})" class="text-slate-400 hover:text-rose-600 transition font-bold px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">Hapus</button>
+                    </td>
+                `;
+                tabel.appendChild(tr);
+            });
+
+            perbaruiDashboard();
+            localStorage.setItem('transaksi', JSON.stringify(daftarTransaksi));
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nominalBersih = bersihkanNominal(jumlahInput.value);
+
+            if (nominalBersih <= 0) {
+                alert("Masukkan jumlah uang yang valid ya!");
+                return;
+            }
+
+            const transaksiBaru = {
+                deskripsi: deskripsiInput.value,
+                jumlah: nominalBersih,
+                jenis: jenisInput.value
+            };
+
+            daftarTransaksi.push(transaksiBaru);
+            renderTransaksi();
+
+            form.reset();
+            deskripsiInput.focus();
+        });
+
+        window.hapusTransaksi = function(index) {
+            if (confirm('Hapus transaksi ini?')) {
+                daftarTransaksi.splice(index, 1);
+                renderTransaksi();
+            }
+        }
+
+        renderTransaksi();
+    </script>
+</body>
+</html>
