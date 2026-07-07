@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENA - Smart Economy Navigation Assistant</title>
+    <title>Sena - Smart Economy Navigation Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
 
     <div class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 pb-16 flex-grow">
         
-<header class="relative mb-8 text-center bg-blue-400/40 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-    
-    <span class="absolute top-3 left-4 sm:top-5 sm:left-6 text-3xl sm:text-4xl select-none">
-        💰
-    </span>
-    
-    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex flex-col items-center justify-center gap-1 w-full px-2">
-        
-        <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent leading-tight font-bold">
-            SENA
-        </span>
-        
-        <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent text-sm sm:text-base md:text-lg font-semibold leading-tight break-words text-center w-full">
-            Smart Economy Navigation Assistant
-        </span>
-        
-    </h1>
-    <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-3 tracking-wide uppercase text-center">Asisten Keuangan Cerdas</p>
-</header>
+        <header class="relative mb-8 text-center bg-blue-400/40 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            
+            <span class="absolute top-3 left-4 sm:top-5 sm:left-6 text-3xl sm:text-4xl select-none">
+                💰
+            </span>
+            
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex flex-col items-center justify-center gap-1 w-full px-2">
+                
+                <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent leading-tight font-bold">
+                    SENA
+                </span>
+                
+                <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent text-sm sm:text-base md:text-lg font-semibold leading-tight break-words text-center w-full">
+                    Smart Economy Navigation Assistant
+                </span>
+                
+            </h1>
+            <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-3 tracking-wide uppercase text-center">Asisten Keuangan Cerdas</p>
+        </header>
+
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
@@ -90,24 +91,26 @@
                 </form>
             </div>
 
-            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-8 w-full overflow-hidden">
-                <h2 class="text-lg sm:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
-                    <span>📋</span> Riwayat Transaksi
+            <div class="bg-white p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-8 w-full overflow-hidden">
+                <h2 class="text-base sm:text-lg lg:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
+                    <span></span> Riwayat Transaksi
                 </h2>
-                <div class="w-full overflow-x-auto rounded-xl border border-slate-100" style="max-height: 380px; overflow-y: scroll;">
-                    <table class="min-w-full divide-y divide-slate-100 table-auto">
+                
+                <div class="w-full overflow-x-auto rounded-xl border border-slate-100" style="max-height: 380px; overflow-y: auto;">
+                    <table class="w-full divide-y divide-slate-100 table-fixed">
                         <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50">Deskripsi</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50">Jenis</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50">Jumlah</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50">Aksi</th>
+                                <th class="px-3 sm:px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider w-[40%]">Deskripsi</th>
+                                <th class="px-3 sm:px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider w-[20%]">Jenis</th>
+                                <th class="px-3 sm:px-4 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider w-[25%]">Jumlah</th>
+                                <th class="px-3 sm:px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider w-[15%]">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="tabel-transaksi" class="bg-white divide-y divide-slate-100 text-sm">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
+                
                 <div id="pesan-kosong" class="text-center py-10 text-slate-400 font-medium hidden">
                     📭 Belum ada catatan transaksi masuk/keluar.
                 </div>
@@ -121,14 +124,14 @@
                 <p>&copy; 2026 <span class="font-semibold text-slate-700">Sena</span>. Hak Cipta Dilindungi.</p>
             </div>
             <div class="flex items-center gap-4 mt-1">
-                <a href="https://github.com/yinflia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
+                <a href="https://github.com/username-kamu" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
                     <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
                     </svg>
                     <span class="text-xs font-medium">GitHub</span>
                 </a>
                 <span class="text-slate-300">|</span>
-                <a href="https://linkedin.com/in/nabilafalia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
+                <a href="https://linkedin.com/in/username-kamu" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors group">
                     <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
                     </svg>
@@ -137,6 +140,7 @@
             </div>
         </div>
     </footer>
+
 
     <script>
         let daftarTransaksi = JSON.parse(localStorage.getItem('transaksi')) || [];
@@ -201,7 +205,6 @@
                 pesanKosong.classList.add('hidden');
             }
 
-            // Membalik data agar yang baru diinput otomatis naik ke baris paling atas
             const transaksiTerbalik = [...daftarTransaksi].reverse();
 
             transaksiTerbalik.forEach((t, urutanTerbalik) => {
@@ -211,16 +214,16 @@
                 tr.className = "hover:bg-slate-50/80 transition-colors";
                 
                 const jenisBadge = t.jenis === 'pemasukan' 
-                    ? `<span class="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
-                    : `<span class="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
+                    ? `<span class="inline-flex items-center justify-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 min-w-[60px]">Masuk</span>`
+                    : `<span class="inline-flex items-center justify-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200 min-w-[60px]">Keluar</span>`;
 
                 const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600' : 'text-rose-600';
 
                 tr.innerHTML = `
-                    <td class="px-3 sm:px-4 py-3 text-left text-slate-700 font-medium break-words">${t.deskripsi}</td>
-                    <td class="px-3 sm:px-4 py-3 text-center">${jenisBadge}</td>
-                    <td class="px-3 sm:px-4 py-3 text-right ${warnaJumlah} font-semibold whitespace-nowrap">${formatRupiah(t.jumlah)}</td>
-                    <td class="px-3 sm:px-4 py-3 text-center">
+                    <td class="px-3 sm:px-4 py-3 text-left text-slate-700 font-medium break-words align-middle">${t.deskripsi}</td>
+                    <td class="px-3 sm:px-4 py-3 text-center align-middle">${jenisBadge}</td>
+                    <td class="px-3 sm:px-4 py-3 text-right ${warnaJumlah} font-semibold whitespace-nowrap align-middle">${formatRupiah(t.jumlah)}</td>
+                    <td class="px-3 sm:px-4 py-3 text-center align-middle">
                         <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-medium text-xs sm:text-sm px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">
                             Hapus
                         </button>
@@ -228,7 +231,7 @@
                 `;
                 tabel.appendChild(tr);
             });
-            
+
             perbaruiDashboard();
             localStorage.setItem('transaksi', JSON.stringify(daftarTransaksi));
         }
