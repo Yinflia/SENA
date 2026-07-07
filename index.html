@@ -11,19 +11,31 @@
     <div class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 pb-16 flex-grow">
         
        <header class="mb-8 text-center bg-blue-400/40 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-center justify-center gap-2 flex-wrap w-full px-2">
-                <span class="inline-flex items-center gap-2 max-w-full">
-                    <span class="select-none shrink-0">💰</span>
-                    <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent break-words text-center min-w-0 py-1 leading-relaxed">
-                        SENA
-                    </span>
-                    <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent break-words text-center min-w-0 py-1 leading-relaxed">
-                        Smart Economy Navigation Assistant
-                    </span> 
+    <!-- Ubah items-center menjadi items-start pada h1 agar sejajar ke atas -->
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-start justify-center gap-2 w-full px-2">
+        
+        <span class="inline-flex items-start gap-2 max-w-full text-left">
+            <!-- Emoji: shrink-0 agar tidak mengecil, mt-1 agar sejajar secara visual dengan baris pertama -->
+            <span class="select-none shrink-0 mt-1">💰</span>
+            
+            <!-- Wadah Teks: flex-col untuk menumpuk teks secara vertikal -->
+            <span class="flex flex-col min-w-0">
+                
+                <!-- Baris 1: SENA -->
+                <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent leading-tight">
+                    SENA
                 </span>
-            </h1>
-            <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-2 tracking-wide uppercase">Asisten Keuangan Cerdas</p>
-        </header>
+                
+                <!-- Baris 2: Smart Economy... (Font sedikit dikecilkan & font-weight dikurangi agar ada hierarki) -->
+                <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent text-sm sm:text-base md:text-lg font-bold leading-tight break-words mt-1">
+                    Smart Economy Navigation Assistant
+                </span>
+                
+            </span>
+        </span>
+    </h1>
+    <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-2 tracking-wide uppercase">Asisten Keuangan Cerdas</p>
+       </header>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 relative overflow-hidden group">
