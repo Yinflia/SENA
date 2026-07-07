@@ -91,17 +91,19 @@
                 </form>
             </div>
 
-            <div class="bg-white p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-8 w-full overflow-hidden">
-                <h2 class="text-base sm:text-lg lg:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
-                    <span></span> Riwayat Transaksi
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 lg:col-span-8 w-full overflow-hidden">
+                <h2 class="text-lg sm:text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
+                    <span>📋</span> Riwayat Transaksi
                 </h2>
                 
-                <div class="w-full overflow-x-auto rounded-xl border border-slate-100" style="max-height: 380px; overflow-y: auto;">
+                <!-- Tampilan Tabel (untuk Tablet & Laptop) -->
+                <div class="hidden md:block w-full overflow-x-auto rounded-xl border border-slate-100" style="max-height: 380px; overflow-y: auto;">
                     <table class="w-full divide-y divide-slate-100 table-fixed">
                         <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
                             <tr>
-                                <th class="px-3 sm:px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider w-[40%]">Deskripsi</th>
-                                <th class="px-3 sm:px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider w-[20%]">Jenis</th>
+                                <th class="px-3 sm:px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider w-[15%]">Tanggal</th>
+                                <th class="px-3 sm:px-4 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider w-[30%]">Deskripsi</th>
+                                <th class="px-3 sm:px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider w-[15%]">Jenis</th>
                                 <th class="px-3 sm:px-4 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider w-[25%]">Jumlah</th>
                                 <th class="px-3 sm:px-4 py-3 text-center text-xs font-bold text-slate-400 uppercase tracking-wider w-[15%]">Aksi</th>
                             </tr>
@@ -109,6 +111,12 @@
                         <tbody id="tabel-transaksi" class="bg-white divide-y divide-slate-100 text-sm">
                         </tbody>
                     </table>
+                </div>
+                
+                <!-- Tampilan Card (untuk Mobile) - DENGAN SCROLL -->
+                <div class="md:hidden w-full rounded-xl border border-slate-100" style="max-height: 380px; overflow-y: auto;">
+                    <div id="card-transaksi" class="space-y-3 p-4">
+                    </div>
                 </div>
                 
                 <div id="pesan-kosong" class="text-center py-10 text-slate-400 font-medium hidden">
@@ -163,6 +171,15 @@
             return 'Rp ' + parseInt(angka).toLocaleString('id-ID');
         }
 
+        function formatTanggal(timestamp) {
+            const date = new Date(timestamp);
+            const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+            const tanggal = date.getDate();
+            const bulanNama = bulan[date.getMonth()];
+            const tahun = date.getFullYear();
+            return `${tanggal} ${bulanNama} ${tahun}`;
+        }
+
         function perbaruiDashboard() {
             let pemasukan = 0;
             let pengeluaran = 0;
@@ -196,42 +213,69 @@
 
         function renderTransaksi() {
             const tabel = document.getElementById('tabel-transaksi');
+            const cardContainer = document.getElementById('card-transaksi');
             const pesanKosong = document.getElementById('pesan-kosong');
+            
             tabel.innerHTML = '';
+            cardContainer.innerHTML = '';
 
             if (daftarTransaksi.length === 0) {
                 pesanKosong.classList.remove('hidden');
             } else {
                 pesanKosong.classList.add('hidden');
+                
+                const transaksiTerbalik = [...daftarTransaksi].reverse();
+
+                transaksiTerbalik.forEach((t, urutanTerbalik) => {
+                    const indexAsli = daftarTransaksi.length - 1 - urutanTerbalik;
+                    
+                    const jenisBadge = t.jenis === 'pemasukan' 
+                        ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Masuk</span>`
+                        : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-rose-100 text-rose-700">Keluar</span>`;
+
+                    const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600' : 'text-rose-600';
+                    const jumlahFormatted = formatRupiah(t.jumlah);
+                    const tanggalFormatted = formatTanggal(t.timestamp || Date.now());
+
+                    // Untuk Tabel (Tablet & Laptop)
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50/80 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-3 sm:px-4 py-3 text-left text-slate-500 text-xs sm:text-sm align-middle whitespace-nowrap">${tanggalFormatted}</td>
+                        <td class="px-3 sm:px-4 py-3 text-left text-slate-700 font-medium break-words align-middle text-sm">${t.deskripsi}</td>
+                        <td class="px-3 sm:px-4 py-3 text-center align-middle">${jenisBadge}</td>
+                        <td class="px-3 sm:px-4 py-3 text-right ${warnaJumlah} font-semibold whitespace-nowrap align-middle text-sm">${jumlahFormatted}</td>
+                        <td class="px-3 sm:px-4 py-3 text-center align-middle">
+                            <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-medium text-xs sm:text-sm px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">
+                                Hapus
+                            </button>
+                        </td>
+                    `;
+                    tabel.appendChild(tr);
+
+                    // Untuk Card (Mobile)
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-50 rounded-xl p-4 border border-slate-100";
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex-1">
+                                <p class="text-slate-800 font-semibold text-sm">${t.deskripsi}</p>
+                                <p class="text-slate-500 text-xs mt-0.5">${tanggalFormatted}</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${jenisBadge}
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-slate-200">
+                            <p class="${warnaJumlah} font-bold text-base">${jumlahFormatted}</p>
+                            <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-medium text-sm px-3 py-1.5 rounded-md hover:bg-rose-50">
+                                Hapus
+                            </button>
+                        </div>
+                    `;
+                    cardContainer.appendChild(card);
+                });
             }
-
-            const transaksiTerbalik = [...daftarTransaksi].reverse();
-
-            transaksiTerbalik.forEach((t, urutanTerbalik) => {
-                const indexAsli = daftarTransaksi.length - 1 - urutanTerbalik;
-                
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/80 transition-colors";
-                
-                const jenisBadge = t.jenis === 'pemasukan' 
-                    ? `<span class="inline-flex items-center justify-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 min-w-[60px]">Masuk</span>`
-                    : `<span class="inline-flex items-center justify-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200 min-w-[60px]">Keluar</span>`;
-
-                const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600' : 'text-rose-600';
-
-                tr.innerHTML = `
-                    <td class="px-3 sm:px-4 py-3 text-left text-slate-700 font-medium break-words align-middle">${t.deskripsi}</td>
-                    <td class="px-3 sm:px-4 py-3 text-center align-middle">${jenisBadge}</td>
-                    <td class="px-3 sm:px-4 py-3 text-right ${warnaJumlah} font-semibold whitespace-nowrap align-middle">${formatRupiah(t.jumlah)}</td>
-                    <td class="px-3 sm:px-4 py-3 text-center align-middle">
-                        <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-medium text-xs sm:text-sm px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">
-                            Hapus
-                        </button>
-                    </td>
-                `;
-                tabel.appendChild(tr);
-            });
-
             perbaruiDashboard();
             localStorage.setItem('transaksi', JSON.stringify(daftarTransaksi));
         }
@@ -248,7 +292,8 @@
             const transaksiBaru = {
                 deskripsi: deskripsiInput.value,
                 jumlah: nominalBersih,
-                jenis: jenisInput.value
+                jenis: jenisInput.value,
+                timestamp: Date.now()
             };
 
             daftarTransaksi.push(transaksiBaru);
