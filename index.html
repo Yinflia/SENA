@@ -211,22 +211,24 @@
                 tr.className = "hover:bg-slate-50/80 transition-colors";
                 
                 const jenisBadge = t.jenis === 'pemasukan' 
-                    ? `<span class="px-2 py-0.5 inline-flex text-xs font-bold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
-                    : `<span class="px-2 py-0.5 inline-flex text-xs font-bold rounded-md bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
+                    ? `<span class="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">Masuk</span>`
+                    : `<span class="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">Keluar</span>`;
 
-                const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600 font-semibold' : 'text-rose-600 font-semibold';
+                const warnaJumlah = t.jenis === 'pemasukan' ? 'text-emerald-600' : 'text-rose-600';
 
                 tr.innerHTML = `
-                    <td class="px-4 py-3 whitespace-nowrap text-slate-700 font-medium">${t.deskripsi}</td>
-                    <td class="px-4 py-3 whitespace-nowrap">${jenisBadge}</td>
-                    <td class="px-4 py-3 whitespace-nowrap ${warnaJumlah}">${formatRupiah(t.jumlah)}</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-right text-xs font-medium">
-                        <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-bold px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">Hapus</button>
+                    <td class="px-3 sm:px-4 py-3 text-left text-slate-700 font-medium break-words">${t.deskripsi}</td>
+                    <td class="px-3 sm:px-4 py-3 text-center">${jenisBadge}</td>
+                    <td class="px-3 sm:px-4 py-3 text-right ${warnaJumlah} font-semibold whitespace-nowrap">${formatRupiah(t.jumlah)}</td>
+                    <td class="px-3 sm:px-4 py-3 text-center">
+                        <button onclick="hapusTransaksi(${indexAsli})" class="text-slate-400 hover:text-rose-600 transition font-medium text-xs sm:text-sm px-2 py-1 rounded-md hover:bg-rose-50 cursor-pointer">
+                            Hapus
+                        </button>
                     </td>
                 `;
                 tabel.appendChild(tr);
             });
-
+            
             perbaruiDashboard();
             localStorage.setItem('transaksi', JSON.stringify(daftarTransaksi));
         }
